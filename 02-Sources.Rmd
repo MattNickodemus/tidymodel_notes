@@ -1,0 +1,18 @@
+# Sources
+
+The tidymodels webpage managed by RStudio.
+
+https://www.tidymodels.org/
+
+The tidymodels book
+
+https://www.tmwr.org/
+
+This is a good little book on data science and tidymodels. It is pretty up to date. The only issue I have is that they use Jupyter notebooks. I might want to look into trying that, though.
+
+https://ubc-dsci.github.io/introduction-to-datascience/
+
+
+
+
+

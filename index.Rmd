@@ -1,0 +1,15 @@
+--- 
+title: "My tidymodels notes"
+author: "Matt Nickodemus"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "I can never remember anything that I do, so why not write a book."
+---
+
+# Disclaimer
+
+These are my notes on the tidymodels metapackage. These notes are copied from several other sources, so nothing here should be considered by me. This is just my collection of notes, thoughts, and things.
