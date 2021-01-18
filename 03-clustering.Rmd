@@ -1,12 +1,12 @@
 # Clustering {#clustering}
 
-These are my notes from the tutorial on K-means clustering in the tidymodels framework. They have some really nice pictures by Allison Horst for this process so I stole them.
+These are my notes from the tutorial on k-means clustering in the tidymodels framework. The code comes from RStudio. The RStudio website also has some really nice pictures by Allison Horst for this process so I stole those as well.
 
 ## Quick description
 
 How does this algorithm work?
 
-Suppose we start with a random set of two dimensional data points. Also assume that we want to group this data into three classes. We would randomly guess where the centroid of each of the three sets was. Then we could classify each point as belonging to the the class of the centroid nearest it. Then we recalculate the centroids. We again classify each point based on it's nearest centroid point, then recalculate the centroid. 
+We start with a random set of two dimensional data points. Assume we want to group this data into three classes. Begin by randomly guessing where the centroid of each of the three sets is. Then classify each point as belonging to the class of the centroid nearest it. Next recalculate the centroid for each cluster. Again classify each point based on it's nearest centroid, then recalculate the centroid. Repeat.
 
 ## In pictures
 
@@ -32,7 +32,7 @@ Thank you to Allison Horst for drawing these.
 
 ## In R
 
-To see how this looks in R, let's load the tidymodels libraries.
+To see how this looks in R, load the tidymodels libraries.
 
 ```{r}
 library(tidymodels)
@@ -52,7 +52,7 @@ centers <- tibble(
 )
 ```
 
-Now we generate the points. This is a great trick here where we apply the `rnorm` function using `{purr}` to create a nested data frame. We then drop the input (*num_points*) that we used to generate the data, and unnest. Viola, a data frame with data labeled in clusters. I like this a lot.
+Now generate the points. This is a great trick here where we apply the `rnorm` function using `{purr}` to create a nested data frame. We then drop the input (`num_points`) that we used to generate the data, unnest, and viola, a data frame with data labeled in clusters. I like this a lot.
 
 ```{r}
 labelled_points <- 
