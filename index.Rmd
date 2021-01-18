@@ -7,9 +7,9 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-description: "I can never remember anything that I do, so why not write a book."
+description: "Notes on tidymodels I keep as I learn the new library."
 ---
 
 # Disclaimer
 
-These are my notes on the tidymodels metapackage. These notes are copied from several other sources, so nothing here should be considered by me. This is just my collection of notes, thoughts, and things.
+These are my notes on the tidymodels meta-package. The thoughts, code, drawings, and notes are copied from several other sources, so **nothing here should be attributed to me**. This is just my notebook where I collect things I like as I learn. 

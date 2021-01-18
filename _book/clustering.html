@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Clustering | My tidymodels notes</title>
-  <meta name="description" content="I can never remember anything that I do, so why not write a book." />
+  <meta name="description" content="Notes on tidymodels I keep as I learn the new library." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Clustering | My tidymodels notes" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="I can never remember anything that I do, so why not write a book." />
+  <meta property="og:description" content="Notes on tidymodels I keep as I learn the new library." />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 3 Clustering | My tidymodels notes" />
   
-  <meta name="twitter:description" content="I can never remember anything that I do, so why not write a book." />
+  <meta name="twitter:description" content="Notes on tidymodels I keep as I learn the new library." />
   
 
 <meta name="author" content="Matt Nickodemus" />
@@ -130,7 +130,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Notes on tidymodels</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Disclaimer</a></li>
@@ -163,11 +163,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="clustering" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Clustering</h1>
-<p>These are my notes from the tutorial on K-means clustering in the tidymodels framework. They have some really nice pictures by Allison Horst for this process so I stole them.</p>
+<p>These are my notes from the tutorial on k-means clustering in the tidymodels framework. The code comes from RStudio. The RStudio website also has some really nice pictures by Allison Horst for this process so I stole those as well.</p>
 <div id="quick-description" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Quick description</h2>
 <p>How does this algorithm work?</p>
-<p>Suppose we start with a random set of two dimensional data points. Also assume that we want to group this data into three classes. We would randomly guess where the centroid of each of the three sets was. Then we could classify each point as belonging to the the class of the centroid nearest it. Then we recalculate the centroids. We again classify each point based on it’s nearest centroid point, then recalculate the centroid.</p>
+<p>We start with a random set of two dimensional data points. Assume we want to group this data into three classes. Begin by randomly guessing where the centroid of each of the three sets is. Then classify each point as belonging to the class of the centroid nearest it. Next recalculate the centroid for each cluster. Again classify each point based on it’s nearest centroid, then recalculate the centroid. Repeat.</p>
 </div>
 <div id="in-pictures" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> In pictures</h2>
@@ -185,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="in-r" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> In R</h2>
-<p>To see how this looks in R, let’s load the tidymodels libraries.</p>
+<p>To see how this looks in R, load the tidymodels libraries.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="clustering.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span></code></pre></div>
 <pre><code>## ── Attaching packages ────────────────────────────────────── tidymodels 0.1.2 ──</code></pre>
 <pre><code>## ✓ broom     0.7.3      ✓ recipes   0.1.15
@@ -210,7 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-6"><a href="clustering.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">3</span>),              <span class="co"># x1 coordinate of cluster center</span></span>
 <span id="cb5-7"><a href="clustering.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">2</span>)              <span class="co"># x2 coordinate of cluster center</span></span>
 <span id="cb5-8"><a href="clustering.html#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>Now we generate the points. This is a great trick here where we apply the <code>rnorm</code> function using <code>{purr}</code> to create a nested data frame. We then drop the input (<em>num_points</em>) that we used to generate the data, and unnest. Viola, a data frame with data labeled in clusters. I like this a lot.</p>
+<p>Now generate the points. This is a great trick here where we apply the <code>rnorm</code> function using <code>{purr}</code> to create a nested data frame. We then drop the input (<code>num_points</code>) that we used to generate the data, unnest, and viola, a data frame with data labeled in clusters. I like this a lot.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="clustering.html#cb6-1" aria-hidden="true" tabindex="-1"></a>labelled_points <span class="ot">&lt;-</span> </span>
 <span id="cb6-2"><a href="clustering.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  centers <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="clustering.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
